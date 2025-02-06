@@ -1,0 +1,100 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API generadora de texto.",
+    "description": "Esta API se encarga de generar un texto a partir de un prompt introducido por el usuario.",
+    "version": "1.0.0"
+  },
+  "host": "127.0.0.1:5000",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/texto": {
+      "post": {
+        "summary": "Genera un texto basado en un prompt",
+        "description": "Envía un prompt junto a los parámetros max_length, temperature y top_p para obtener una respuesta",
+        "parameters": [
+          {
+            "name": "texto",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "prompt": {
+                  "type": "string",
+                  "example": "¿Como se hace una paella?"
+                },
+                "max_length": {
+                  "type": "integer",
+                  "example": 200
+                },
+                "temperature": {
+                  "type": "number",
+                  "example": 0.9
+                },
+                "top_p": {
+                  "type": "number",
+                  "example": 0.8
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Texto generado con éxito",
+            "schema": {
+              "type": "string",
+              "example": "La paella es un plato de origen valenciano, que se prepara..."
+            }
+          },
+          "400": {
+            "description": "Error al generar el texto",
+            "schema": {
+              "type": "string",
+              "example": "Se requiere un prompt para generar el texto"
+            }
+          }
+        }
+      }
+    },
+    "/solicitudes": {
+      "get": {
+        "summary": "Muestra el historial de textos",
+        "description": "Muestra por pantalla el historial de textos introducidos y generados",
+        "responses": {
+          "200": {
+            "description": "Historial de solicitudes",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "solicitudes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "prompt": {
+                        "type": "string",
+                        "example": "¿Como se hace una paella?"
+                      },
+                      "response": {
+                        "type": "string",
+                        "example": "La paella es un plato de origen valenciano, que se prepara..."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
