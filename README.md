@@ -15,14 +15,23 @@ Ejecutar el programa mediante el siguiente comando:
     python main.py
 
 Mediante la pagina Postman o por consola, enviar un prompt a 'http://127.0.0.1:5000/texto' junto con los siguientes parámetros para generar un texto:
-
+Mediante Postman:
     {
-	"prompt": "(string no vacío)",
-    "max_length": (número entero mayor que 0 y menor o igual que 1000),
-    "temperature": (número decimal entre 0.2 y 1.2),
-    "top_p": (número decimal entre 0.4 y 0.9)
+	    "prompt": "(string no vacío)",
+      "max_length": (número entero mayor que 0 y menor o igual que 1000),
+      "temperature": (número decimal entre 0.2 y 1.2),
+      "top_p": (número decimal entre 0.4 y 0.9)
     }
-
+Por consola:
+    curl -X POST http://127.0.0.1:5000/texto \
+    -H "Content-Type: application/json" \
+    -d '{
+      "prompt": "¿Cómo funciona la inteligencia artificial?",
+      "max_length": 100,
+      "temperature": 0.7,
+      "top_p": 0.85
+    }' 
+    
 Para ver el historial de textos generados dirigirse a 'http://127.0.0.1:5000/solicitudes'
 
 ## Ejemplo de solicitudes
